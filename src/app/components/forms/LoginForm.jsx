@@ -31,9 +31,8 @@ let schema = Joi.object({
 
 export default function LoginForm() {
   const auth = useAuth();
-  const onSubmit = async (values) => {
-    console.log("Login Form", values);
-  };
+
+  const onSubmit = async (values) => {};
 
   const handleGoogleAuth = async (res) => {
     const { tokenId } = res;
@@ -71,6 +70,7 @@ export default function LoginForm() {
       schema={schema}
       formTitle="Login Form"
       buttons={buttons}
+      submitDisabled
     />
   );
 }

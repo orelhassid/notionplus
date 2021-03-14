@@ -1,15 +1,11 @@
-import {
-  fade,
-  FormControl,
-  FormHelperText,
-  withStyles,
-} from "@material-ui/core";
+import { fade, withStyles } from "@material-ui/core";
 import React from "react";
 import InputBase from "@material-ui/core/InputBase";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
 
-const CustomInput = withStyles((theme) => ({
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FieldWrapper from "./FieldWrapper";
+
+export const CustomInput = withStyles((theme) => ({
   root: {
     "label + &": {
       marginTop: theme.spacing(3),
@@ -34,22 +30,15 @@ const CustomInput = withStyles((theme) => ({
 }))(InputBase);
 
 export default function Input({ field, value, onChange, error }) {
-  const { label, name, type, help, placeholder } = field;
+  const { name, type, placeholder } = field;
   return (
-    <FormControl fullWidth error={!!error}>
-      <InputLabel shrink htmlFor={name}>
-        {label}
-      </InputLabel>
-      <CustomInput
-        placeholder={placeholder}
-        id={name}
-        name={name}
-        type={type}
-        value={value}
-        onChange={onChange}
-      />
-      <FormHelperText id="my-helper-text">{error || help}</FormHelperText>
-      {/* <InputAdornment /> */}
-    </FormControl>
+    <CustomInput
+      placeholder={placeholder}
+      id={name}
+      name={name}
+      type={type}
+      value={value}
+      onChange={onChange}
+    />
   );
 }

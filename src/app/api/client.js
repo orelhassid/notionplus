@@ -8,23 +8,24 @@ const apiClient = axios.create({
   timeout: 1000,
 });
 
-apiClient.interceptors.request.use(null, async (req) => {
+apiClient.interceptors.request.use(async (req) => {
   const token = await authStorage.getToken();
-  if (!token) return;
+  if (!token) return req;
   req.headers["x-auth-token"] = token;
+  return req;
 });
 
-apiClient.interceptors.response.use(null, (response) => {
-  console.log("interceptors", response);
-  // if (response) {
-  //   cache.store(url, response.data);
-  //   return response;
-  // }
+// apiClient.interceptors.response.use(null, (response) => {
+//   console.log("interceptors", response);
+//   // if (response) {
+//   //   cache.store(url, response.data);
+//   //   return response;
+//   // }
 
-  // const data = cache.get(url);
-  // return data ? { ok: true, data } : response;
-  // return Promise.reject(error);
-  return response;
-});
+//   // const data = cache.get(url);
+//   // return data ? { ok: true, data } : response;
+//   // return Promise.reject(error);
+//   return response;
+// });
 
 export default apiClient;

@@ -1,12 +1,21 @@
 import React from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router";
 
-import { LOGIN_RT, HOME_RT, PROFILE_RT, LOGOUT_RT } from "../config/routes";
+import {
+  LOGIN_RT,
+  HOME_RT,
+  PROFILE_RT,
+  LOGOUT_RT,
+  SITES_RT,
+  SITES_CREATE_RT,
+} from "../config/routes";
 import Home from "../pages/Home";
 import LoginPage from "../pages/LoginPage";
 import LogoutPage from "../pages/LogoutPage";
 import AccountPage from "../pages/AccountPage";
 import useAuth from "../hooks/useAuth";
+import SitesPage from "../pages/SitesPage";
+import SiteCreate from "../pages/SiteCreate";
 
 export default function AppRouter() {
   return (
@@ -14,6 +23,8 @@ export default function AppRouter() {
       <RedirectAuthRoute path={LOGIN_RT} component={LoginPage} />
       <Route path={LOGOUT_RT} component={LogoutPage} />
       <ProtectedRoute path={PROFILE_RT} component={AccountPage} />
+      <ProtectedRoute path={SITES_CREATE_RT} component={SiteCreate} />
+      <ProtectedRoute path={SITES_RT} component={SitesPage} />
       <Route path={HOME_RT} component={Home} />
     </Switch>
   );

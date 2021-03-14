@@ -56,12 +56,10 @@ export default function Drawer() {
     >
       <List>
         {links.map(
-          ({ label, to, hide }) =>
+          ({ label, to, icon, hide }) =>
             !hide && (
               <ListItem button key={label} component={RouterLink} to={to}>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
+                <ListItemIcon>{icon}</ListItemIcon>
                 <ListItemText primary={label} />
               </ListItem>
             )

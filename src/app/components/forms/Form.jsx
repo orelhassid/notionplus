@@ -3,10 +3,20 @@ import { Box, Typography } from "@material-ui/core";
 import Fields from "./Fields";
 import Button from "../Button";
 
-export default function Form({ fields, onSubmit, schema, formTitle, buttons }) {
+export default function Form({
+  fields,
+  onSubmit,
+  schema,
+  formTitle,
+  buttons,
+  submitLabel,
+  submitDisabled,
+}) {
   const [data, setData] = useState(() => {
     let state = {};
-    fields.forEach(({ name }) => (state[name] = ""));
+    fields.forEach(
+      ({ name, defaultValue }) => (state[name] = defaultValue || "")
+    );
     return state;
   });
   const [errors, setErrors] = useState({});
@@ -16,6 +26,7 @@ export default function Form({ fields, onSubmit, schema, formTitle, buttons }) {
     const isValid = handleValidation();
     if (!isValid) return;
 
+    setErrors({});
     onSubmit(data);
   };
 
@@ -57,11 +68,12 @@ export default function Form({ fields, onSubmit, schema, formTitle, buttons }) {
         />
         <Box py={2} textAlign="center">
           <Button
-            label="Submit"
+            label={submitLabel}
             type="submit"
             variant="contained"
             color="primary"
             textColor="#fff"
+            disabled={submitDisabled}
           />
           <Box py={1}>
             {buttons.map(({ button, ...rest }, index) =>
@@ -80,4 +92,6 @@ export default function Form({ fields, onSubmit, schema, formTitle, buttons }) {
 
 Form.defaultProps = {
   buttons: [],
+  submitLabel: "Submit",
+  submitDisabled: false,
 };

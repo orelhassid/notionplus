@@ -1,3 +1,4 @@
+import { Typography } from "@material-ui/core";
 import React from "react";
 import LoginForm from "../components/forms/LoginForm";
 import Header from "../components/Header";
@@ -10,10 +11,15 @@ export default function LoginPage() {
     <Page>
       <Header
         title="WELCOME TO NOTION PLUS"
-        subTitle="Making a beatifull website builded with Notion"
+        subTitle="Making beatiful websites builded with Notion"
         center
       />
-      <h3>{user.name}</h3>
+      <Typography
+        variant="subtitle1"
+        style={{ textAlign: "center", opacity: 0.8 }}
+      >
+        Currently only Google Authentication is supported.
+      </Typography>
       <LoginForm />
     </Page>
   );
