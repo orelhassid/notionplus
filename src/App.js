@@ -1,22 +1,24 @@
+import React, { useState } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { CssBaseline } from "@material-ui/core";
-import { Routes } from "./routes";
-import { BrowserRouter } from "react-router-dom";
-import ThemeProvider from "./theme/ThemeProvider";
-import UserContextProvider from "./contexts/UserContext";
-function App() {
+
+import AppRouter from "./app/services/AppRouter";
+import ThemeProvider from "./app/contexts/theme";
+import { AuthContextProvider } from "./app/contexts/auth";
+import useAuth from "./app/hooks/useAuth";
+import AppLoading from "./app/components/AppLoading";
+
+export default function App() {
+  const [isUserReady, setIsUserReady] = useState(false);
+
   return (
-    <BrowserRouter>
-      <ThemeProvider>
+    <ThemeProvider>
+      <AuthContextProvider onReady={setIsUserReady}>
         <HelmetProvider>
-          <UserContextProvider>
-            <CssBaseline />
-            <Routes />
-          </UserContextProvider>
+          <CssBaseline />
+          {isUserReady ? <AppRouter /> : <AppLoading />}
         </HelmetProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+      </AuthContextProvider>
+    </ThemeProvider>
   );
 }
-
-export default App;
