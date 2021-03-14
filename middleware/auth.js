@@ -5,20 +5,21 @@ const secret = process.env.SECRET;
 const auth = async (req, res, next) => {
   try {
     const token = req.headers["x-auth-token"];
-    console.log("Token", token);
-    // const isCustomAuth = token.length < 500;
 
+    console.log("Token", token);
     let decodedData;
 
-    if (token && isCustomAuth) {
-      decodedData = jwt.verify(token, secret);
+    decodedData = jwt.verify(token, secret);
+    req.userId = decodedData?.id;
 
-      req.userId = decodedData?.id;
-    } else {
-      decodedData = jwt.decode(token);
+    // if (token) {
+    //   decodedData = jwt.verify(token, secret);
 
-      req.userId = decodedData?.sub;
-    }
+    // } else {
+    //   decodedData = jwt.decode(token);
+
+    //   req.userId = decodedData?.sub;
+    // }
 
     next();
   } catch (error) {

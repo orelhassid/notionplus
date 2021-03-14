@@ -1,10 +1,11 @@
-import mongoose from "mongoose";
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
 import { SECRET, expiresIn, CLIENT_ID } from "../config/index.js";
 
 const googleCLient = new OAuth2Client(CLIENT_ID);
+
+const makeUsername = (name) => name.toLocaleLowerCase().replace(/\s+/g, "");
 
 const googleVerify = async (token) => {
   try {
@@ -32,6 +33,7 @@ export const googleAuth = async (req, res) => {
       image: payload.picture,
       firstName: payload.given_name,
       lastName: payload.family_name,
+      username: makeUsername(payload.name),
     });
 
     console.log("Google Authentication ticket", user.toObject());
