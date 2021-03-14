@@ -6,13 +6,11 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   id: { type: String },
   headline: String,
-  country: String,
-  city: String,
+  address: String,
   phone: String,
   lastName: String,
   firstName: String,
   image: String,
-  socials: Array,
 });
 
 const User = mongoose.model("User", userSchema);

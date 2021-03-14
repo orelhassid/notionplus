@@ -4,8 +4,9 @@ const secret = process.env.SECRET;
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    const isCustomAuth = token.length < 500;
+    const token = req.headers["x-auth-token"];
+    console.log("Token", token);
+    // const isCustomAuth = token.length < 500;
 
     let decodedData;
 
@@ -22,7 +23,7 @@ const auth = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    res.status(500).json( { details: "No Authorization Header" } );
+    res.status(500).json({ details: "No Authorization Header" });
   }
 };
 
