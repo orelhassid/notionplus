@@ -53,10 +53,18 @@ export default function Navigation({ back }) {
           flexGrow={1}
           className={classes.logoContainer}
         >
-          <Logo fill="inherit" className={classes.logoIcon} />
-          <Typography variant="h6" className={classes.title}>
-            {app.name}
-          </Typography>
+          <Box display="flex" alignItems="center">
+            <Logo fill="inherit" className={classes.logoIcon} />
+            <Typography variant="h6" className={classes.title}>
+              {app.name}
+            </Typography>
+            <Typography
+              variant="caption"
+              style={{ opacity: 0.8, marginLeft: 5 }}
+            >
+              {app.version}
+            </Typography>
+          </Box>
         </Box>
         {isMobile ? (
           <Box>
