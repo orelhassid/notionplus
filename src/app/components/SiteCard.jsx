@@ -3,8 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Button from "./Button";
+import { SITES_RT } from "../config/routes";
+import AlertDialog from "./feedback/AlertDialog";
 
 const useStyles = makeStyles({
   root: {
@@ -23,9 +25,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SiteCard({ title, description }) {
+export default function SiteCard({ site, onDelete }) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+
+  const { title, description, slug, _id } = site;
 
   return (
     <Card className={classes.root}>
@@ -38,7 +41,27 @@ export default function SiteCard({ title, description }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Manage</Button>
+        <Button
+          size="small"
+          to={`${SITES_RT}/${slug}`}
+          label="Manage"
+          variant="text"
+          color="default"
+        />
+        <AlertDialog
+          onClick={() => onDelete(_id)}
+          title="Delete this site?"
+          description="All the settings associated with this site will be deleted. Note: this action is permanent"
+          confirmLabel="Delete"
+        >
+          <Button
+            size="small"
+            label="Delete"
+            variant="text"
+            color="default"
+            // onClick={() => onDelete(_id)}
+          />
+        </AlertDialog>
       </CardActions>
     </Card>
   );

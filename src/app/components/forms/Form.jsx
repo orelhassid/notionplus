@@ -11,14 +11,18 @@ export default function Form({
   buttons,
   submitLabel,
   submitDisabled,
+  newData,
 }) {
   const [data, setData] = useState(() => {
     let state = {};
     fields.forEach(
-      ({ name, defaultValue }) => (state[name] = defaultValue || "")
+      ({ name, defaultValue }) =>
+        (state[name] = defaultValue !== undefined ? defaultValue : "")
     );
-    return state;
+
+    return { ...state, ...newData };
   });
+
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {

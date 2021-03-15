@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Joi from "joi";
 
 import Form from "./Form";
@@ -28,7 +28,6 @@ const fields = [
     name: "rtl",
     type: "switch",
     help: "If selected your website will support Right-To-Left",
-    defaultValue: false,
     options: [
       { value: true, label: "On" },
       { value: false, label: "Off" },
@@ -47,11 +46,6 @@ const fields = [
     defaultValue: "light",
   },
 ];
-/**
- * Title, Slug, description,
- * rtl, theme,
- * domain, pretty name
- */
 
 let schema = Joi.object({
   title: Joi.string().required(),
@@ -60,14 +54,20 @@ let schema = Joi.object({
   theme: Joi.string().required(),
 });
 
-export default function SiteForm() {
+export default function SiteManageForm({ site }) {
   const history = useHistory();
+
+  const newData = {
+    title: site.title,
+    description: site.description,
+    rtl: site.rtl,
+    theme: site.theme,
+  };
+
   const onSubmit = async (siteSettings) => {
-    // console.log("SiteForm Form", siteSettings);
     // Create Sites
     try {
-      const result = await siteApi.createSite(siteSettings);
-      // console.log("SiteForm createSite", result);
+      await siteApi.updateSite({ ...site, ...siteSettings });
       history.push(SITES_RT);
     } catch (error) {
       console.error(error);
@@ -80,6 +80,7 @@ export default function SiteForm() {
       onSubmit={onSubmit}
       schema={schema}
       formTitle="Site Settings"
+      newData={newData}
     />
   );
 }

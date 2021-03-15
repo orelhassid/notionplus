@@ -6,7 +6,6 @@ export default function SwitchField({ onChange, value, field, ...rest }) {
   const handleChange = ({ target }) => {
     onChange({ target: { name: target.name, value: target.checked } });
   };
-
   return (
     <FieldWrapper field={field} {...rest} disableLabel>
       <FormGroup>

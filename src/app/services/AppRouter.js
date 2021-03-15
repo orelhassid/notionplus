@@ -8,14 +8,17 @@ import {
   LOGOUT_RT,
   SITES_RT,
   SITES_CREATE_RT,
+  SITE_MANAGE_RT,
 } from "../config/routes";
 import Home from "../pages/Home";
 import LoginPage from "../pages/LoginPage";
 import LogoutPage from "../pages/LogoutPage";
 import AccountPage from "../pages/AccountPage";
 import useAuth from "../hooks/useAuth";
-import SitesPage from "../pages/SitesPage";
-import SiteCreate from "../pages/SiteCreate";
+
+import SitesPage from "../pages/sites/SitesPage";
+import SiteCreate from "../pages/sites/SiteCreate";
+import SiteManage from "../pages/sites/SiteManage";
 
 export default function AppRouter() {
   return (
@@ -24,6 +27,7 @@ export default function AppRouter() {
       <Route path={LOGOUT_RT} component={LogoutPage} />
       <ProtectedRoute path={PROFILE_RT} component={AccountPage} />
       <ProtectedRoute path={SITES_CREATE_RT} component={SiteCreate} />
+      <ProtectedRoute path={SITE_MANAGE_RT} component={SiteManage} />
       <ProtectedRoute path={SITES_RT} component={SitesPage} />
       <Route path={HOME_RT} component={Home} />
     </Switch>
