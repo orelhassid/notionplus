@@ -10,12 +10,7 @@ import AlertDialog from "./feedback/AlertDialog";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
+    minWidth: "100%",
   },
   title: {
     fontSize: 14,

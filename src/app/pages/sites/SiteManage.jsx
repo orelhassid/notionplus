@@ -12,7 +12,7 @@ export default function SiteManage() {
   const site = sites.find((s) => s.slug === slug);
 
   return (
-    <Page isReady={isReady}>
+    <Page isReady={isReady} back>
       <Header title={`Manage '${site?.title}'`} subTitle="" center />
       <SiteManageForm site={site} />
     </Page>

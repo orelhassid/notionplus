@@ -3,10 +3,10 @@ import AppLoading from "./AppLoading";
 import Navigation from "./Navigation/Navigation";
 import { Fade } from "@material-ui/core";
 
-export default function Page({ children, isReady }) {
+export default function Page({ children, isReady, back }) {
   return (
     <div>
-      <Navigation />
+      <Navigation back={back} />
       {isReady ? children : <AppLoading />}
     </div>
   );

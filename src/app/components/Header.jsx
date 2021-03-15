@@ -10,7 +10,7 @@ import React from "react";
 const useStyles = makeStyles((theme) => ({
   header: {
     [theme.breakpoints.up("sm")]: {
-      padding: theme.spacing(5),
+      // padding: theme.spacing(5),
     },
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(2),
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function Header({ title, subTitle, center }) {
+export default function Header({ title, subTitle, center, ...rest }) {
   const classes = useStyles();
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
@@ -28,6 +28,8 @@ export default function Header({ title, subTitle, center }) {
       className={classes.header}
       component="header"
       textAlign={center && "center"}
+      p={5}
+      {...rest}
     >
       <Typography variant="h1" component="h1">
         {title}

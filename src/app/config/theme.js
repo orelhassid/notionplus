@@ -33,8 +33,16 @@ const theme = createMuiTheme({
       fontSize: "2rem",
       fontWeight: 500,
     },
+    h2: {
+      fontSize: "1.7rem",
+      fontWeight: 500,
+    },
     h3: {
-      fontSize: "1rem",
+      fontSize: "1.2rem",
+      fontWeight: 500,
+    },
+    subtitle2: {
+      fontSize: "0.8rem",
       fontWeight: 500,
     },
     h4: {

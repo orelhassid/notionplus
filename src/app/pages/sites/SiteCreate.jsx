@@ -6,7 +6,7 @@ import Page from "../../components/Page";
 
 export default function SiteCreate() {
   return (
-    <Page>
+    <Page back>
       <Header title="Create New Site" subTitle="" center />
 
       <SiteForm />
