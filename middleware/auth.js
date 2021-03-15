@@ -6,25 +6,18 @@ const auth = async (req, res, next) => {
   try {
     const token = req.headers["x-auth-token"];
 
-    console.log("Token", token);
     let decodedData;
 
     decodedData = jwt.verify(token, secret);
+    console.log("Decoede DAta", decodedData);
     req.userId = decodedData?.id;
-
-    // if (token) {
-    //   decodedData = jwt.verify(token, secret);
-
-    // } else {
-    //   decodedData = jwt.decode(token);
-
-    //   req.userId = decodedData?.sub;
-    // }
 
     next();
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ details: "No Authorization Header" });
+    if (error.name === "TokenExpiredError")
+      return res.status(401).json({ details: error.message });
+
+    res.status(500).json({ details: "No Token Provided" });
   }
 };
 
