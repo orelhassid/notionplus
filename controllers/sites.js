@@ -69,3 +69,13 @@ export const updateSite = async (req, res) => {
     console.error(error);
   }
 };
+
+export const getSiteById = async (req, res) => {
+  const { siteId } = req.params;
+  try {
+    const site = await Site.findById(siteId);
+    res.status(200).json(site);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
