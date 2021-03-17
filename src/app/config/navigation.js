@@ -48,3 +48,39 @@ export default {
 };
 
 // icon: <NotificationsIcon />,
+
+// function getLinks(user, status) {
+//   return [
+//     {
+//       label: "Home",
+//       to: HOME_RT,
+//       icon: <HomeIcon />,
+//     },
+//     {
+//       label: "Login",
+//       to: LOGIN_RT,
+//       icon: <LoginIcon />,
+//       hide: status.isLogin,
+//     },
+//     {
+//       // label: "Account",
+//       label: user.name,
+//       to: PROFILE_RT,
+//       icon: <AccountIcon />,
+//       hide: !status.isLogin,
+//     },
+//     {
+//       label: "My Sites",
+//       to: SITES_RT,
+//       icon: <SitesIcon />,
+//       hide: !status.isLogin,
+//     },
+
+//     {
+//       label: "Logout",
+//       to: LOGOUT_RT,
+//       icon: <LogoutIcon />,
+//       hide: !status.isLogin,
+//     },
+//   ];
+// }

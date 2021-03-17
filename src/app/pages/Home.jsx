@@ -13,9 +13,12 @@ import useAuth from "../hooks/useAuth";
 const useStyles = makeStyles((theme) => ({
   headerContainer: {
     display: "flex",
-    minHeight: "50vh",
+    // minHeight: "50vh",
+    height: "80vh",
     flexWrap: "wrap",
+    marginBottom: theme.spacing(10),
     alignItems: "center",
+    justifyContent: "space-around",
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
     },
@@ -49,11 +52,15 @@ const useStyles = makeStyles((theme) => ({
     // flexGrow: 3,
     width: "100%",
   },
+  cardsContainer: {
+    maxWidth: 960,
+    margin: "0 auto",
+    justifyContent: "center",
+  },
 }));
 export default function Home() {
   const classes = useStyles();
   const { status } = useAuth();
-
   return (
     <Page>
       {/* <Header
@@ -77,13 +84,13 @@ export default function Home() {
           </Box>
         </Box>
 
-        <Box mx="auto" className={classes.headerImage}>
+        <Box className={classes.headerImage}>
           <HomeCover />
         </Box>
       </Box>
       <Box textAlign="center">
         <Typography variant="h2">How It Works?</Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} className={classes.cardsContainer}>
           <Grid item xs={12} sm={4}>
             <SimpleCard
               Icon={WorkerIcon}
@@ -107,7 +114,7 @@ export default function Home() {
 const SimpleCard = ({ title, description, Icon }) => (
   <Paper style={{ height: "100%" }}>
     <Box p={2}>
-      <Icon width={100} />
+      <Icon width="50%" />
       <Typography variant="h3">{title}</Typography>
       <Typography variant="subtitle2">{description}</Typography>
     </Box>

@@ -5,6 +5,7 @@ import Form from "./Form";
 import GoogleAuth from "./GoogleAuth";
 import useAuth from "../../hooks/useAuth";
 import authApi from "../../api/auth";
+import useAlert from "../../hooks/useAlert";
 
 const fields = [
   {
@@ -31,6 +32,7 @@ let schema = Joi.object({
 
 export default function LoginForm() {
   const auth = useAuth();
+  const alert = useAlert();
 
   const onSubmit = async (values) => {};
 
@@ -40,6 +42,9 @@ export default function LoginForm() {
       const response = await authApi.googleAuth(tokenId);
 
       auth.login(response.data.token);
+      alert.setAlert({
+        message: "Login Success!",
+      });
     } catch (error) {
       console.error(error);
     }

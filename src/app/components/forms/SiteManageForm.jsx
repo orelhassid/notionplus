@@ -5,6 +5,8 @@ import Form from "./Form";
 import siteApi from "../../api/site";
 import { useHistory } from "react-router";
 import { SITES_RT } from "../../config/routes";
+import useAlert from "../../hooks/useAlert";
+import useSites from "../../hooks/useSites";
 
 const fields = [
   {
@@ -42,6 +44,9 @@ const fields = [
     options: [
       { value: "dark", label: "Dark" },
       { value: "light", label: "Light" },
+      { value: "palenight", label: "Palenight" },
+      { value: "solarized_light", label: "Solarized Light" },
+      { value: "night_owl", label: "Night Owl" },
     ],
     defaultValue: "light",
   },
@@ -56,6 +61,8 @@ let schema = Joi.object({
 
 export default function SiteManageForm({ site }) {
   const history = useHistory();
+  const alert = useAlert();
+  const siteHook = useSites();
 
   const newData = {
     title: site.title,
@@ -63,12 +70,16 @@ export default function SiteManageForm({ site }) {
     rtl: site.rtl,
     theme: site.theme,
   };
+  console.log("♥ Site Settings Form");
 
   const onSubmit = async (siteSettings) => {
     // Create Sites
     try {
-      await siteApi.updateSite({ ...site, ...siteSettings });
-      history.push(SITES_RT);
+      await siteHook.updateSite({ ...site, ...siteSettings });
+      alert.setAlert({
+        message: "Site Updated",
+      });
+      // history.push(SITES_RT);
     } catch (error) {
       console.error(error);
     }

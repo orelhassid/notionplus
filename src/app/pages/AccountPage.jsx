@@ -1,5 +1,6 @@
 import { Avatar, Box, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import DashboardPage from "../components/DashboardPage";
 
 import Header from "../components/Header";
 import Page from "../components/Page";
@@ -26,7 +27,7 @@ export default function AccountPage() {
   const { user } = useAuth();
   const classes = useStyles();
   return (
-    <Page>
+    <DashboardPage>
       <Box
         display="flex"
         mx="auto"
@@ -40,6 +41,6 @@ export default function AccountPage() {
         <Typography variant="h1">{user.name}</Typography>
         <Typography variant="subtitle1">{user.email}</Typography>
       </Box>
-    </Page>
+    </DashboardPage>
   );
 }

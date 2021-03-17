@@ -17,7 +17,7 @@ import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    // flexGrow: 1,
     color: "#fff",
     fill: "#fff",
   },
@@ -45,7 +45,7 @@ export default function Navigation({ back }) {
   const links = navigation.getLinks(user, status);
 
   return (
-    <AppBar position="static" className={classes.root}>
+    <AppBar position="static" className={classes.root} elevation={0}>
       <Toolbar>
         <Box
           display="flex"

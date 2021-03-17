@@ -1,5 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import RubikRegular from "../assets/fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf";
+
+import RubikRegular from "../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf";
 
 const Font = {
   fontFamily: "Rubik",
@@ -82,12 +83,16 @@ const theme = createMuiTheme({
       1: "#FBFBFB",
     },
   },
-  MuiCssBaseline: {
-    "@global": {
-      "html, body": {},
-      "@font-face": [Font],
-      // "@font-face": [FONT_MEDIUM],
-      body: {},
+
+  overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        "html, body, #root": {
+          height: "100%",
+        },
+        "@font-face": [Font],
+        // "@font-face": [FONT_MEDIUM],
+      },
     },
   },
 });
