@@ -70,7 +70,6 @@ export default function SiteManageForm({ site }) {
     rtl: site.rtl,
     theme: site.theme,
   };
-  console.log("♥ Site Settings Form");
 
   const onSubmit = async (siteSettings) => {
     // Create Sites

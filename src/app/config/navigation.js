@@ -43,8 +43,40 @@ function getLinks(user, status) {
   ];
 }
 
+function getDashboardLinks({ user, status, handleClick }) {
+  return [
+    {
+      label: "Home",
+      to: "/",
+      icon: <HomeIcon />,
+    },
+    {
+      label: "Sites",
+      icon: <SitesIcon />,
+      to: SITES_RT,
+    },
+    {
+      label: "Account",
+      icon: <AccountIcon />,
+      onClick: () => handleClick("Account"),
+      nested: [
+        {
+          label: "Settings",
+          to: "/account/settings",
+        },
+      ],
+    },
+    {
+      label: "Logout",
+      icon: <LogoutIcon />,
+      to: LOGOUT_RT,
+    },
+  ];
+}
+
 export default {
   getLinks,
+  getDashboardLinks,
 };
 
 // icon: <NotificationsIcon />,

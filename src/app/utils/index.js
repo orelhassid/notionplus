@@ -1,4 +1,5 @@
 export const isEmpty = (element) => {
+  if (element === undefined) return true;
   if (element.constructor === Array) {
     return element.length === 0;
   }

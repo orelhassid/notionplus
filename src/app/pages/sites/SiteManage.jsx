@@ -10,16 +10,21 @@ import { Typography } from "@material-ui/core";
 import SiteWorkerPanel from "./SiteWorkerPanel";
 
 export default function SiteManage() {
-  const { slug } = useParams();
-  const { sites, isReady, currentSite } = useSites(slug);
+  const { isReady, currentSite, fetchSites } = useSites();
+
+  useEffect(() => {
+    fetchSites();
+  }, []);
 
   const tabs = [
     {
       panel: <SiteManageForm site={currentSite} />,
+
       label: "Settings",
     },
     {
-      panel: <SiteWorkerPanel />,
+      panel: <SiteWorkerPanel currentSite={currentSite} />,
+
       label: "Worker",
     },
     {

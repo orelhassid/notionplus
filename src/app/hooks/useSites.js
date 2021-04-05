@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import siteApi from "../api/site";
-
-const useSites = (slug) => {
+import { isEmpty } from "../utils";
+const useSites = () => {
   const [sites, setSites] = useState([]);
   const [currentSite, setCurrentSite] = useState({});
   const [isReady, setIsReady] = useState(false);
-  const getSites = async () => {
+  const { slug } = useParams();
+
+  const fetchSites = async () => {
     try {
       const { data } = await siteApi.getSites();
       setSites(data);
@@ -15,14 +18,19 @@ const useSites = (slug) => {
     }
   };
 
-  useEffect(() => {
-    getSites();
-  }, []);
+  const getCurrentSite = () => {
+    const site = sites.find((s) => s.slug === slug);
+    setCurrentSite(site);
+  };
 
   useEffect(() => {
-    const site = getSite(slug);
-    setCurrentSite(site);
-  }, [sites, slug]);
+    if (slug && !isEmpty(sites)) {
+      getCurrentSite();
+    }
+    return () => {
+      setCurrentSite({});
+    };
+  }, [sites]);
 
   const deleteSite = async (siteId) => {
     let originalSites = [...sites];
@@ -38,16 +46,13 @@ const useSites = (slug) => {
 
   const updateSite = async (siteInfo) => {
     let originalSites = [...sites];
-
     let updatedSites = sites.map((site) =>
       site._id === siteInfo._id ? { ...site, ...siteInfo } : site
     );
-    console.log("updatedSites", {
-      updatedSites,
-      originalSites,
-    });
+
     try {
       setSites(updatedSites);
+      setCurrentSite(siteInfo);
       await siteApi.updateSite(siteInfo);
     } catch (error) {
       setSites(originalSites);
@@ -55,10 +60,6 @@ const useSites = (slug) => {
     }
   };
 
-  const getSite = (slug) => {
-    return sites.find((s) => s.slug === slug);
-  };
-
-  return { sites, deleteSite, updateSite, currentSite, isReady };
+  return { sites, fetchSites, deleteSite, updateSite, currentSite, isReady };
 };
 export default useSites;

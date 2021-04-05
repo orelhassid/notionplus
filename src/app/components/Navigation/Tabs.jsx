@@ -38,15 +38,7 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
 export default function SimpleTabs({ tabs }) {
-  const classes = useStyles();
   const { isMobile } = useDevice();
   const [value, setValue] = React.useState(0);
 

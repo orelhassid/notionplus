@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fade, Grid, makeStyles } from "@material-ui/core";
 
 import useSites from "../../hooks/useSites";
@@ -19,8 +19,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SitesPage() {
-  const { sites, deleteSite, isReady } = useSites();
+  const { sites, fetchSites, deleteSite, isReady } = useSites();
   const classes = useStyles();
+
+  useEffect(() => {
+    fetchSites();
+  }, []);
 
   return (
     <Page isReady={isReady}>

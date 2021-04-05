@@ -30,7 +30,7 @@ export const CustomInput = withStyles((theme) => ({
 }))(InputBase);
 
 export default function Input({ field, value, onChange, error }) {
-  const { name, type, placeholder } = field;
+  const { name, type, placeholder, multiline } = field;
   return (
     <CustomInput
       placeholder={placeholder}
@@ -39,6 +39,7 @@ export default function Input({ field, value, onChange, error }) {
       type={type}
       value={value}
       onChange={onChange}
+      multiline={multiline}
     />
   );
 }

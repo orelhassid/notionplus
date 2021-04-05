@@ -24,3 +24,7 @@ export default function FieldWrapper({ field, children, error, disableLabel }) {
     </FormControl>
   );
 }
+
+FieldWrapper.defaultProps = {
+  field: {},
+};

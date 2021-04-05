@@ -19,12 +19,14 @@ import useAuth from "../hooks/useAuth";
 import SitesPage from "../pages/sites/SitesPage";
 import SiteCreate from "../pages/sites/SiteCreate";
 import SiteManage from "../pages/sites/SiteManage";
+import Lab from "../pages/Lab";
 
 export default function AppRouter() {
   return (
     <Switch>
       <RedirectAuthRoute path={LOGIN_RT} component={LoginPage} />
       <Route path={LOGOUT_RT} component={LogoutPage} />
+      <Route path="/lab" component={Lab} />
       <ProtectedRoute path={PROFILE_RT} component={AccountPage} />
       <ProtectedRoute path={SITES_CREATE_RT} component={SiteCreate} />
       <ProtectedRoute path={SITE_MANAGE_RT} component={SiteManage} />

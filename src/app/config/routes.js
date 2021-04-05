@@ -2,7 +2,7 @@
 export const HOME_RT = "/";
 export const LOGIN_RT = "/login";
 export const LOGOUT_RT = "/logout";
-export const PROFILE_RT = "/me";
+export const PROFILE_RT = "/account";
 export const REGISTER_RT = "/register";
 
 export const SITES_RT = "/sites";

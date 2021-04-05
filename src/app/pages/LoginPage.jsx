@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
+import React from "react";
+import { Box, makeStyles } from "@material-ui/core";
 
 import LoginForm from "../components/forms/LoginForm";
 import Header from "../components/Header";
 import Page from "../components/Page";
-import useAuth from "../hooks/useAuth";
-import useAlert from "../hooks/useAlert";
-import Layout from "../components/Layout";
+
 import BackgroundImage from "../components/BackgroundImage";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,19 +29,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginPage() {
-  const { user } = useAuth();
-  const alert = useAlert();
   const classes = useStyles();
 
-  useEffect(() => {
-    alert.setAlert({
-      message: "Login Success!",
-      button: {
-        label: "Refresh",
-        onClick: () => console.log("Refresh The Page"),
-      },
-    });
-  }, []);
   return (
     <Page>
       {/* <Layout fullHeight> */}

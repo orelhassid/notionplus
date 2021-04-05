@@ -1,6 +1,6 @@
 import { useMediaQuery } from "@material-ui/core";
 
-const useDevice = () => {
+export const useDevice = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
 
   return { isMobile };
