@@ -6,5 +6,5 @@ export const PROFILE_RT = "/account";
 export const REGISTER_RT = "/register";
 
 export const SITES_RT = "/sites";
-export const SITES_CREATE_RT = "/new/site";
+export const SITES_CREATE_RT = "/new/site/pages";
 export const SITE_MANAGE_RT = "/sites/:slug/:tab";
