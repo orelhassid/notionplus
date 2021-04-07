@@ -57,7 +57,6 @@ export const updateSite = async (req, res) => {
   try {
     const site = req.body;
     const { _id } = site;
-    console.log("Site", site);
 
     if (!mongoose.Types.ObjectId.isValid(_id))
       return res.status(404).send("The site id is inValid.");
@@ -74,6 +73,18 @@ export const getSiteById = async (req, res) => {
   const { siteId } = req.params;
   try {
     const site = await Site.findById(siteId);
+    res.status(200).json(site);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getSiteByDomain = async (req, res) => {
+  const { domain } = req.params;
+  try {
+    const site = await Site.findOne({
+      domain,
+    });
     res.status(200).json(site);
   } catch (error) {
     res.status(404).json({ message: error.message });

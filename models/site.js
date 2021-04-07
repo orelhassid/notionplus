@@ -7,6 +7,7 @@ const siteSchema = mongoose.Schema({
   theme: { type: String, required: true },
   userId: { type: String, required: true },
   slug: { type: String, required: true },
+  domain: { type: String },
 });
 
 const Site = mongoose.model("Site", siteSchema);
