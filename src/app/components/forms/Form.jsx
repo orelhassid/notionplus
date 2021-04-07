@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { Box, Typography } from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import Fields from "./Fields";
 import Button from "../Button";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    // display: "flex",
+  },
+}));
 
 export default function Form({
   fields,
@@ -22,6 +28,8 @@ export default function Form({
 
     return { ...state, ...newData };
   });
+
+  const classes = useStyles();
 
   const [errors, setErrors] = useState({});
 
@@ -57,7 +65,13 @@ export default function Form({
   };
 
   return (
-    <Box px={4} mx="auto" maxWidth={640}>
+    <Box
+      // px={4}
+      py={4}
+      // mx="auto"
+      className={classes.container}
+      maxWidth={640}
+    >
       {formTitle && (
         <Box pb={2}>
           <Typography variant="h3">{formTitle}</Typography>

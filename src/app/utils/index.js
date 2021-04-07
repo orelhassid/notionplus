@@ -11,6 +11,11 @@ export const isEmpty = (element) => {
   return !element;
 };
 
+export const copyClipboard = async (data) => {
+  await navigator.clipboard.writeText(data);
+};
+
 export default {
   isEmpty,
+  copyClipboard,
 };

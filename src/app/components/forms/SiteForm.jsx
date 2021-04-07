@@ -8,6 +8,13 @@ import { SITES_RT } from "../../config/routes";
 
 const fields = [
   {
+    label: "Domain",
+    placeholder: "orelhassid.com",
+    type: "text",
+    name: "domain",
+    help: "you domain name will be use to query you site settings",
+  },
+  {
     label: "Title",
     placeholder: "Notion Plus",
     type: "text",

@@ -10,6 +10,13 @@ import useSites from "../../hooks/useSites";
 
 const fields = [
   {
+    label: "Domain",
+    placeholder: "orelhassid.com",
+    type: "text",
+    name: "domain",
+    help: "you domain name will be use to query you site settings",
+  },
+  {
     label: "Title",
     placeholder: "Notion Plus",
     type: "text",
@@ -57,6 +64,7 @@ let schema = Joi.object({
   description: Joi.string().optional().allow(""),
   rtl: Joi.boolean().optional().allow(""),
   theme: Joi.string().required(),
+  domain: Joi.string().optional().allow(""),
 });
 
 export default function SiteManageForm({ site }) {
@@ -69,6 +77,7 @@ export default function SiteManageForm({ site }) {
     description: site.description,
     rtl: site.rtl,
     theme: site.theme,
+    domain: site.domain,
   };
 
   const onSubmit = async (siteSettings) => {

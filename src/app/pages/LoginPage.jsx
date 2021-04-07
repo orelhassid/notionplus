@@ -35,7 +35,13 @@ export default function LoginPage() {
     <Page>
       {/* <Layout fullHeight> */}
       <Box className={classes.boxContainer}>
-        <Box flexGrow={1}>
+        <Box
+          flexGrow={1}
+          justifyContent="center"
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+        >
           <Header
             title="WELCOME TO NOTION PLUS"
             subTitle="Making beatiful websites builded with Notion"

@@ -8,6 +8,7 @@ import Page from "../../components/Page";
 import useSites from "../../hooks/useSites";
 import { Typography } from "@material-ui/core";
 import SiteWorkerPanel from "./SiteWorkerPanel";
+import SitePagesForm from "../../components/forms/SitePagesForm";
 
 export default function SiteManage() {
   const { isReady, currentSite, fetchSites } = useSites();
@@ -19,17 +20,23 @@ export default function SiteManage() {
   const tabs = [
     {
       panel: <SiteManageForm site={currentSite} />,
-
       label: "Settings",
+      slug: "settings",
+    },
+    {
+      panel: <SitePagesForm currentSite={currentSite} />,
+      label: "Pages",
+      slug: "pages",
     },
     {
       panel: <SiteWorkerPanel currentSite={currentSite} />,
-
       label: "Worker",
+      slug: "worker",
     },
     {
       panel: <Typography>Access</Typography>,
       label: "Access",
+      slug: "access",
     },
   ];
 

@@ -7,4 +7,4 @@ export const REGISTER_RT = "/register";
 
 export const SITES_RT = "/sites";
 export const SITES_CREATE_RT = "/new/site";
-export const SITE_MANAGE_RT = "/sites/:slug";
+export const SITE_MANAGE_RT = "/sites/:slug/:tab";

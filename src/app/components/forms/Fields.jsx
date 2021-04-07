@@ -4,6 +4,7 @@ import Input from "./Input";
 import TextField from "./TextField";
 import SelectField from "./SelectField";
 import SwitchField from "./SwitchField";
+import DoubleTextField from "./DoubleTextField";
 
 export default function Fields({ fields, onChange, values, errors }) {
   const renderFields = (field, value, error) => {
@@ -20,6 +21,15 @@ export default function Fields({ fields, onChange, values, errors }) {
       case "switch":
         return (
           <SwitchField
+            field={field}
+            onChange={onChange}
+            value={value}
+            error={error}
+          />
+        );
+      case "doubleText":
+        return (
+          <DoubleTextField
             field={field}
             onChange={onChange}
             value={value}
@@ -44,8 +54,9 @@ export default function Fields({ fields, onChange, values, errors }) {
         {fields.map((field) => {
           const value = values[field.name];
           const error = errors[field.name];
+          const size = field?.xs || 12;
           return (
-            <Grid item xs={12} key={field.name}>
+            <Grid item xs={size} key={field.name}>
               {renderFields(field, value, error)}
             </Grid>
           );

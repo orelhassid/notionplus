@@ -3,7 +3,7 @@ const generateCode = (siteSettings = {}) => {
 
   console.log("Generate Code Run");
   return `
-  cosole.log(${title})    
+  cosole.log(${title}) 
     `;
 };
 
