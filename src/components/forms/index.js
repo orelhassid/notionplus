@@ -1,1 +1,0 @@
-export {default as AccountForm} from './settings/AccountForm'
