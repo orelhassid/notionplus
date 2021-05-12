@@ -7,25 +7,22 @@ const googleCLient = new OAuth2Client(CLIENT_ID);
 
 const makeUsername = (name) => name.toLocaleLowerCase().replace(/\s+/g, "");
 
-const googleVerify = async (token) => {
-  try {
-    const ticket = await googleCLient.verifyIdToken({
-      idToken: token,
-      audience: CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
-    const userId = payload["sub"];
-    return { payload, userId };
-  } catch (error) {
-    console.error("googleVerify", error);
-    res.status(500).json(error);
-  }
+const googleVerify = async (tokenId) => {
+  const ticket = await googleCLient.verifyIdToken({
+    idToken: tokenId,
+    audience: CLIENT_ID,
+  });
+  const payload = ticket.getPayload();
+  const userId = payload["sub"];
+  return { payload, userId };
 };
 export const googleAuth = async (req, res) => {
   try {
-    const { token } = req.body;
+    const { tokenId } = req.body;
+
     // Token Verification
-    const { payload, userId } = await googleVerify(token);
+
+    const { payload, userId } = await googleVerify(tokenId);
 
     const user = await createUser({
       email: payload.email,
@@ -36,14 +33,15 @@ export const googleAuth = async (req, res) => {
       username: makeUsername(payload.name),
     });
 
-    console.log("Google Authentication ticket", user.toObject());
+    // const isNew = false;
+    const isNew = !user?.lastErrorObject?.updatedExisting;
+    const userData = user?.value;
 
-    // res.send(user).status(200);
-    const tokenSign = jwt.sign({ ...user.toObject(), id: user._id }, SECRET, {
+    const tokenSign = jwt.sign(userData.toJSON(), SECRET, {
       expiresIn,
     });
 
-    res.status(200).json({ user, token: tokenSign });
+    res.status(200).json({ token: tokenSign, isNew });
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
@@ -51,15 +49,11 @@ export const googleAuth = async (req, res) => {
 };
 
 export const createUser = async (user) => {
-  try {
-    const newUser = await User.findOneAndUpdate({ email: user.email }, user, {
-      new: true,
-      upsert: true,
-    }).exec();
-    return newUser;
-  } catch (error) {
-    res.status(409).json({ message: error.message });
-  }
+  return await User.findOneAndUpdate({ email: user.email }, user, {
+    new: true,
+    upsert: true,
+    rawResult: true,
+  }).exec();
 };
 
 export default {
