@@ -1,65 +1,65 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router";
-import siteApi from "../api/site";
-import { isEmpty } from "../utils";
+import { useContext, useEffect, useState } from "react";
+import useAlert from "./useAlert";
+import sitesApi from "../api/sites";
+
 const useSites = () => {
   const [sites, setSites] = useState([]);
-  const [currentSite, setCurrentSite] = useState({});
-  const [isReady, setIsReady] = useState(false);
-  const { slug } = useParams();
+  const [isReady, setIsReady] = useState(true);
 
-  const fetchSites = async () => {
+  const { setAlert } = useAlert();
+
+  const getSites = async () => {
     try {
-      const { data } = await siteApi.getSites();
-      setSites(data);
-      setIsReady(true);
+      const response = await sitesApi.getSites();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const getCurrentSite = () => {
-    const site = sites.find((s) => s.slug === slug);
-    setCurrentSite(site);
-  };
+  // const isReady = posts.status === "ready";
 
   useEffect(() => {
-    if (slug && !isEmpty(sites)) {
-      getCurrentSite();
-    }
-    return () => {
-      setCurrentSite({});
-    };
-  }, [sites]);
+    // if (!isReady) return;
+    // setCurrentPost(posts.posts.find((post) => post.id === postId));
+  }, []);
 
-  const deleteSite = async (siteId) => {
-    let originalSites = [...sites];
-    let updatedSites = sites.filter((site) => site._id !== siteId);
+  const getSiteById = (id) => {
+    return sites.find((site) => site.id === id);
+  };
+
+  const updatePost = async (postInfo) => {
     try {
-      setSites(updatedSites);
-      await siteApi.deleteSite(siteId);
+      setAlert({
+        message: "Submit!",
+      });
     } catch (error) {
-      setSites(originalSites);
       console.error(error);
     }
   };
+  const createSite = async (siteInfo) => {};
 
-  const updateSite = async (siteInfo) => {
-    let originalSites = [...sites];
-    let updatedSites = sites.map((site) =>
-      site._id === siteInfo._id ? { ...site, ...siteInfo } : site
-    );
-
+  const deleteSite = async (siteInfo) => {
     try {
-      setSites(updatedSites);
-      setCurrentSite(siteInfo);
-      await siteApi.updateSite(siteInfo);
+      setAlert({
+        message: `Delete ${siteInfo.title} Successfuly`,
+      });
     } catch (error) {
-      setSites(originalSites);
-      console.error(error);
+      setAlert({
+        message: `Delete failed.`,
+      });
     }
   };
 
-  return { sites, fetchSites, deleteSite, updateSite, currentSite, isReady };
+  return {
+    sites,
+    isReady,
+    getSites,
+    // currentPost,
+    createSite,
+    updatePost,
+    getSiteById,
+    deleteSite,
+    // restore,
+  };
 };
 export default useSites;

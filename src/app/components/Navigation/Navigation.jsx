@@ -1,51 +1,37 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { Box, useMediaQuery, IconButton } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import Box from "@material-ui/core/Box";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-import Drawer from "./Drawer";
-import Button from "../Button";
-import app from "../../config/app";
-import navigation from "../../config/navigation";
-import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
 import useAuth from "../../hooks/useAuth";
-import { useHistory } from "react-router";
-// import ButtonIcon from "../ButtonIcon";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    // flexGrow: 1,
-    color: "#fff",
-    fill: "#fff",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  logoContainer: {
-    color: "inherit",
-    fill: "inherit",
-  },
-  logoIcon: {
-    marginRight: theme.spacing(1),
-  },
-}));
+import useDevice from "../../hooks/useDevice";
+import { app } from "../../config";
+import Drawer from "./Drawer";
+import Button from "../Button/Button";
+import navigation from "./links";
+import useStyles from "./styles";
+import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
+import NavLinks from "./NavLinks";
 
 export default function Navigation({ back }) {
   const classes = useStyles();
   const history = useHistory();
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const { isMobile } = useDevice();
   const { user, status } = useAuth();
 
   const links = navigation.getLinks(user, status);
 
   return (
-    <AppBar position="static" className={classes.root} elevation={0}>
+    <AppBar
+      position="static"
+      className={classes.root}
+      // elevation={0}
+    >
       <Toolbar>
         <Box
           display="flex"
@@ -77,20 +63,7 @@ export default function Navigation({ back }) {
             <Drawer />
           </Box>
         ) : (
-          links.map(
-            (item) =>
-              !item.hide && (
-                <Button
-                  color="inherit"
-                  textColor="#fff"
-                  to={item.to}
-                  label={item.label}
-                  variant="text"
-                  key={item.to}
-                  Icon={item.icon}
-                />
-              )
-          )
+          <NavLinks links={links} />
         )}
       </Toolbar>
     </AppBar>

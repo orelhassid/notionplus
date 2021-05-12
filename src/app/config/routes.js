@@ -1,10 +1,8 @@
-/* --------------------------------- Routes --------------------------------- */
 export const HOME_RT = "/";
-export const LOGIN_RT = "/login";
-export const LOGOUT_RT = "/logout";
-export const PROFILE_RT = "/account";
-export const REGISTER_RT = "/register";
+export const ACCOUNT_RT = "/account";
+export const LOGOUT_RT = "/auth/logout";
 
-export const SITES_RT = "/sites";
-export const SITES_CREATE_RT = "/new/site/pages";
-export const SITE_MANAGE_RT = "/sites/:slug/:tab";
+// Posts
+export const POSTS_RT = "/posts";
+export const POST_RT = "/posts/:id";
+export const NEW_POST_RT = "/new/post";

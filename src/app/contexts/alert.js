@@ -79,7 +79,7 @@ export const AlertContextProvider = ({ children }) => {
           </React.Fragment>
         }
       >
-        {/* <Alert severity={severity}>{message}</Alert> */}
+        <Alert severity={severity}>{message}</Alert>
       </Snackbar>
       {children}
     </AlertContext.Provider>

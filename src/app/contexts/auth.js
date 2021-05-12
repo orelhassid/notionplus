@@ -1,6 +1,7 @@
 import React, { useEffect, useState, createContext } from "react";
-import authStorage from "../services/auth";
-
+import { storageKeys } from "../config";
+import storage from "../services/storage";
+import jwtDecode from "jwt-decode";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children, onReady }) => {
@@ -8,12 +9,15 @@ export const AuthContextProvider = ({ children, onReady }) => {
   const [status, setStatus] = useState({
     isLogin: false,
   });
+
   const restoreUser = async () => {
-    const user = await authStorage.getUser();
-    if (user) {
-      setUser(user);
-      setStatus((prev) => ({ ...prev, isLogin: true }));
-    }
+    const token = await storage.get(storageKeys.user);
+    if (!token) return onReady(true);
+
+    const userStorage = jwtDecode(token);
+    setUser(userStorage);
+    setStatus((prev) => ({ ...prev, isLogin: true }));
+
     onReady(true);
   };
 

@@ -1,17 +1,34 @@
+import { mapUserObject } from "../utils/mapBackend";
 import client from "./client";
 
-const login = (email, password) =>
-  client.post("/auth", {
-    email,
-    password,
-  });
+const register = async ({ email, password }) => {};
 
-const googleAuth = (token) => client.post("/auth/google", { token });
+const login = async ({ email, password }) => {};
 
-const register = (userInfo) => client.post("/users", userInfo);
+const update = async (userInfo) => {};
 
+const deleteUser = async () => {};
+
+const logout = async () => {};
+
+const authGoogle = async (tokenId) => client.post("/auth/google", { tokenId });
+
+const authEmail = async ({ email, actionCodeSettings }) => {};
+
+const returnData = (userCredential) => {
+  return {
+    data: mapUserObject({}),
+    isNewUser: true,
+  };
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  login,
   register,
-  googleAuth,
+  login,
+  logout,
+  update,
+  deleteUser,
+  authGoogle,
+  authEmail,
 };

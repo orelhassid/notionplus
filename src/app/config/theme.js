@@ -1,19 +1,8 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+import { font, fontBody, fontBodyName, fontName } from "./fonts";
 
-import RubikRegular from "../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf";
-
-const Font = {
-  fontFamily: "Rubik",
-  fontStyle: "normal",
-  fontDisplay: "swap",
-
-  src: `url(${RubikRegular}) format('woff2')`,
-  unicodeRange:
-    "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF",
-};
-
-export const FONTS = [
-  "Rubik",
+const FONTS = [
+  fontName,
   "-apple-system",
   "BlinkMacSystemFont",
   '"Segoe UI"',
@@ -31,8 +20,9 @@ const theme = createMuiTheme({
     fontFamily: FONTS.join(","),
 
     h1: {
-      fontSize: "2rem",
-      fontWeight: 500,
+      fontSize: "2.8rem",
+      fontWeight: 600,
+      fontFamily: fontBodyName,
     },
     h2: {
       fontSize: "1.7rem",
@@ -40,6 +30,10 @@ const theme = createMuiTheme({
     },
     h3: {
       fontSize: "1.2rem",
+      fontWeight: 500,
+    },
+    subtitle1: {
+      fontSize: "1rem",
       fontWeight: 500,
     },
     subtitle2: {
@@ -63,9 +57,6 @@ const theme = createMuiTheme({
       letterSpacing: "0.75px",
       textAlign: "left",
     },
-    subtitle1: {
-      fontSize: "0.8rem",
-    },
   },
   palette: {
     text: {
@@ -73,7 +64,7 @@ const theme = createMuiTheme({
       secondary: "#848484",
     },
     primary: {
-      main: "#27CCBC",
+      main: "#334E5C",
     },
     secondary: {
       main: "#FCD462",
@@ -83,18 +74,16 @@ const theme = createMuiTheme({
       1: "#FBFBFB",
     },
   },
-
   overrides: {
     MuiCssBaseline: {
       "@global": {
         "html, body, #root": {
           height: "100%",
         },
-        "@font-face": [Font],
-        // "@font-face": [FONT_MEDIUM],
+        "@font-face": [font],
+        "@font-face": [fontBody],
       },
     },
   },
 });
-
 export default theme;
